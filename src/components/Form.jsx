@@ -2,7 +2,7 @@ import { useState } from "react";
 import { validation} from "./validation.js";
 
 
-const Form = ( { login }) => {
+const Form = ({ login }) => {
 
     const [userData, setUserData] = useState({
         email: "",

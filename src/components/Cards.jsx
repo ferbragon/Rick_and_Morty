@@ -1,10 +1,11 @@
 import Card from './Card';
+import "../stylesheets/Cards.css";
 
 export default function Cards({ characters, onClose }) {
    return (
-   <div>
+   <div className='cards'>
       {
-      characters.map(({ id, name, status, species, gender, origin, image, }) => {
+      characters.map(({ id, name, status, species, gender, origin, image }) => {
          return (
             <Card
             key={id}//Reservado para React

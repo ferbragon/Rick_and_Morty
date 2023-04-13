@@ -1,0 +1,17 @@
+.cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+}
+
+.cards::after { /*Una maravilla al crear elementos flex. Como los elementos estaban centrados "align-items: center", el �ltimo elemento se elinaba al centro
+    del eje transversal. Por lo que al a�adir un elemento al final con el selector after soluciona este detalle. EL elemento tiene contenido una 
+    string vac�a con el mismo ancho de los dem�s elementos.
+*/
+content: "";
+width: 950px;
+}

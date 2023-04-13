@@ -12,10 +12,13 @@ function Nav({ onSearch, logOut }) {
         <NavLink to="/about">About</NavLink>
       </button>
       <button>
+        <NavLink to="/favorites">Favorites</NavLink>
+      </button>
+      <button>
         <NavLink to="/home">Home</NavLink>
       </button>
       <button onClick={logOut}>
-        <NavLink to="/">LogOut</NavLink>
+        <NavLink to="/">Log out</NavLink>
       </button>
     </>
   );

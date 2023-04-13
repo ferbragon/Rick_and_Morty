@@ -3,8 +3,8 @@ import { useState, useEffect} from "react";
 import axios from "axios";
 
 const URL_BASE = "https://be-a-rym.up.railway.app/api/character";
-const API_KEY = "";
-/*`${URL_BASE}/${id}?key=${API_KEY}`*/
+const API_KEY = "e2c9093d788f.170c014870ce69bce089";
+
 
 const Detail = () => {
 
@@ -13,7 +13,7 @@ const Detail = () => {
     const [character, setCharacter] = useState({});
 
     useEffect(() => {
-        axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+        axios(`${URL_BASE}/${id}?key=${API_KEY}`).then(({ data }) => {
            if (data.name) {
               setCharacter(data);
            } else {
