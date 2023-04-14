@@ -3,9 +3,12 @@ import "../stylesheets/Card.css";
 import { addFav, removeFav } from "../redux/actions";
 import { connect } from "react-redux";
 import { useState,useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 
 export function Card({ id, name, status, species, gender, origin, image, onClose, addFav, removeFav, myFavorites }) {
+
+   const location = useLocation();
 
    const [isFav, setIsFav] = useState(false);
 
@@ -32,7 +35,9 @@ export function Card({ id, name, status, species, gender, origin, image, onClose
 
    return (
       <div className="card">
-         <button onClick={() => onClose(id)}>Eliminate</button>
+         <button id={id} onClick={location.pathname === "/home" ? () => onClose(id) : handleFavorite }>
+            {location.pathname === "/home" ? "Eliminate Card" : "Discard favorite"}
+         </button>
          <div className="box-info">
             <div className="content-info">
                <h2 className="info-description"><span className="info">Status: </span>{status}</h2>

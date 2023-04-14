@@ -1,8 +1,8 @@
 import { ADD_FAV, REMOVE_FAV, FILTER, ORDER } from "./types";
 
 const initialState = {
-    myFavorites: [],
-    allCharacters: []
+    myFavorites: [],//Se pisan los resultados de filtrado para mostrar
+    allCharactersFav: []//Se trabajan los filtros en una copia
 }
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -10,29 +10,34 @@ const reducer = (state = initialState, { type, payload }) => {
         case ADD_FAV:
             return {
                 ...state,
-                myFavorites: [...state.myFavorites, payload],
-                allCharacters: [...state.allCharacters,payload]
+                myFavorites: [...state.allCharactersFav, payload],
+                allCharactersFav: [...state.allCharactersFav,payload]
             }
         case REMOVE_FAV:
             let filterRemoveFav = state.myFavorites.filter((character) => character.id !== payload);
-            let filterRemoveFavAll = state.allCharacters.filter((character) => character.id !== payload);
+            let filterRemoveFavAll = state.allCharactersFav.filter((character) => character.id !== payload);
             return {
                 ...state,
                  myFavorites: [...filterRemoveFav],
-                allCharacters: [...filterRemoveFavAll],
+                allCharactersFav: [...filterRemoveFavAll],
     };
         case FILTER:
-            let charactersFilter = state.myFavorites.filter((character) => character.gender === payload);
+            let charactersFilter = state.allCharactersFav.filter((character) => character.gender === payload);
             return {
                 ...state,
-                allCharacters: [...charactersFilter]
+                myFavorites: //Condicional para mostrar todos los personajes de favoritos
+                payload === "All"
+                ? [...state.allCharactersFav]
+                : [...charactersFilter]
             }
+
         case ORDER:
-            let orderA = (a, b) => {return a.id - b.id};
-            let orderD = (a, b) => {return b.id - a.id};
+            const allCharactersFavCopy = [...state.allCharactersFav]
+            const orderA = (a, b) => a.id - b.id;
+            const orderD = (a, b) => b.id - a.id;
             return {
                 ...state,
-                allCharacters: payload === "A" ? [...state.myFavorites].sort(orderA) : [...state.myFavorites].sort(orderD)
+                myFavorites: payload === "A" ? allCharactersFavCopy.sort(orderA) : allCharactersFavCopy.sort(orderD)
             }
         default:
             return { ...state }
