@@ -4,6 +4,8 @@ import { addFav, removeFav } from "../redux/actions";
 import { connect } from "react-redux";
 import { useState,useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import  favNo from "../assets/heartnon.png";
+import favYes from "../assets/heartyes.png";
 
 
 export function Card({ id, name, status, species, gender, origin, image, onClose, addFav, removeFav, myFavorites }) {
@@ -25,41 +27,43 @@ export function Card({ id, name, status, species, gender, origin, image, onClose
    };
 
    useEffect(() => {
+      if (myFavorites.length) {
+         myFavorites.forEach((fav) => {
+            if (fav.id === id) {
+               setIsFav(true);
+            }
+         });
+      }
+   }, [myFavorites, id]);
    
-      myFavorites.forEach((fav) => {
-         if (fav.id === id) {
-            setIsFav(true);
-         }
-      });
-   }, [myFavorites]);
 
    return (
       <div className="card">
          <button id={id} onClick={location.pathname === "/home" ? () => onClose(id) : handleFavorite }>
-            {location.pathname === "/home" ? "Eliminate Card" : "Discard favorite"}
+            {location.pathname === "/home" ? <span>Delete Card</span> : <span>Discard favorite</span>}
          </button>
          <div className="box-info">
             <div className="content-info">
-               <h2 className="info-description"><span className="info">Status: </span>{status}</h2>
-               <h2 className="info-description"><span className="info">Species:</span> {species}</h2>
-               <h2 className="info-description"><span className="info">Gender: </span>{gender}</h2>
-               <h2 className="info-description"><span className="info">Origin: </span>{origin}</h2>
+               <span className="info-description"><span className="info">Status: </span>{status}</span>
+               <span className="info-description"><span className="info">Species:</span> {species}</span>
+               <span className="info-description"><span className="info">Gender: </span>{gender}</span>
+               <span className="info-description"><span className="info">Origin: </span>{origin}</span>
             </div>
-            <div className="content-fav">
             {
                   isFav ? (
-                     <button id={id}  className="fav-button" onClick={handleFavorite}>❤️</button>
+                     <button id={id}  className="fav-button" onClick={handleFavorite}><img className="imageFav" src={favYes} alt="red-heart"/></button>
                   ) : (
-                     <button id={id} className="fav-button" onClick={handleFavorite}>🤍</button>
+                     <button id={id} className="fav-button" onClick={handleFavorite}><img className="imageFavNo" src={favNo} alt="transparent-heart"/></button>
                   )
                }
-            </div>
          </div>
          <NavLink to={`/detail/${id}`}>
-            <img src={image} alt={`Foto de ${name}`} />
+            <img className="img-card" src={image} alt={`Foto de ${name}`}/>
             <h2 className="name">{name}</h2>
          </NavLink>
-         <h2 className="card-number">#{id}</h2>
+         <h2 className="card-number"><span>#{id}</span></h2>
+         <div className="content-fav">
+         </div>
       </div>
    );
 }

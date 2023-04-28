@@ -1,0 +1,49 @@
+.loading {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    font-family: Minecraftia, sans-serif;
+}
+
+.img-loading {
+    height: 25%;
+    width: 25%;
+    border: 1px solid transparent;
+    margin-top: 2%;
+    background-image: url("../assets/portal-rick-and-morty.gif");
+    background-repeat: no-repeat;
+    background-position-y: -20px;
+    background-position-x: -10px;
+    background-size: 110%;
+    border-radius: 50%;
+}
+
+.loading-dot1 {
+    animation: fadeInOut 1.01s infinite;
+}
+
+.loading-dot2 {
+    animation: fadeInOut 1.02s infinite;  
+}
+
+.loading-dot3 {
+    animation: fadeInOut 1.03s infinite;
+}
+
+/*Animations*/
+
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }

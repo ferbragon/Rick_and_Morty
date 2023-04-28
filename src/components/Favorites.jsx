@@ -5,7 +5,6 @@ import { useState } from "react";
 import "../stylesheets/Favorites.css";
 
 export const Favorites = ({ myFavorites, allCharactersFav }) => {
-
     const dispatch = useDispatch();
 
     const [aux, setAux] = useState(false);
@@ -20,22 +19,22 @@ export const Favorites = ({ myFavorites, allCharactersFav }) => {
     };
 
     return (
-        <>
+        <div className="box-favorites">
         <h1>Favorites</h1>
         <select onChange={handleOrder} >
-            <option value="A">Ascendent</option>
-            <option value="D">Descendent</option>
+            <option className="option" value="A">Ascendent</option>
+            <option className="option" value="D">Descendent</option>
         </select>
         <select onChange={handleFilter}>
-            <option value="All">All Characters</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Genderless">Genderless</option>
-            <option value="unknown">unknown</option>
+            <option className="option" value="All">All Characters</option>
+            <option className="option" value="Male">Male</option>
+            <option className="option" value="Female">Female</option>
+            <option className="option" value="Genderless">Genderless</option>
+            <option className="option" value="unknown">unknown</option>
         </select>
         <div className="favorites">
             {
-                myFavorites.map((character) => {
+                myFavorites && myFavorites.map((character) => {
                     return(
                         <Card
                             key={character.id}//Reservado para React
@@ -52,7 +51,7 @@ export const Favorites = ({ myFavorites, allCharactersFav }) => {
                 })
             }
         </div>
-        </>
+        </div>
     )
 };
 

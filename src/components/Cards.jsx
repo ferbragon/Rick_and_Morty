@@ -2,6 +2,7 @@ import Card from './Card';
 import "../stylesheets/Cards.css";
 
 export default function Cards({ characters, onClose }) {
+
    return (
    <div className='cards'>
       {

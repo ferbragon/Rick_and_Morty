@@ -8,23 +8,23 @@ import About from './components/About';
 import Detail from './components/Detail';
 import Form from "./components/Form";
 import Favorites from './components/Favorites';
+import Loading from './components/Loading';
 
 
-const URL_BASE = "https://be-a-rym.up.railway.app/api/character";
-const API_KEY = "e2c9093d788f.170c014870ce69bce089";
+//const URL_BASE = "https://be-a-rym.up.railway.app/api/character";
+//const API_KEY = "e2c9093d788f.170c014870ce69bce089";
+const URL = 'http://localhost:3001/rickandmorty/login';
 
 
 function App() {
    //Variables
    const location = useLocation();
    const navigate = useNavigate();
-   //Data
-   const EMAIL = "nando@gmail.com";
-   const PASS = "nando123";
 
    //States
    const [characters, setCharacters] = useState([]);
    const [access, setAccess] = useState(false);
+   const [loading, setLoading] = useState(false);
 
    //Sets
 
@@ -32,8 +32,8 @@ function App() {
       !access && navigate('/');
    }, [access]);
 
-   const onSearch = (id) => {
-      axios(`${URL_BASE}/${id}?key=${API_KEY}`).then(({ data }) => {
+   /*const onSearch = (id) => {
+      axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
          if (data.name && !characters.some((char) => char.id === data.id)) {
             setCharacters((oldChars) => [...oldChars, data]);
          } else if (data.name && characters.some((char) => char.id === data.id)) {
@@ -42,21 +42,53 @@ function App() {
             window.alert('¡No hay personajes con este ID!');
          }
       });
-   };
+   };*/
+
+   //OnSearch with async await
+
+   const onSearch = async function(id){
+      try{
+         const { data } = await axios(`http://localhost:3001/rickandmorty/character/${id}`);
+         if (data.name && !characters.some((char) => char.id === data.id)) {
+            setCharacters((oldChars) => [...oldChars, data]);
+         } else if (data.name && characters.some((char) => char.id === data.id)) {
+            alert("This character is already showed");
+         } 
+      } catch (error) {
+         alert('There is not characters with this id!');
+      }
+   }
 
    const onClose = (id) => {
       setCharacters((oldChar) =>
       oldChar.filter((character) => character.id !== id))
    };
 
-   const login = (userData) =>{
-      if(userData.email === EMAIL && userData.password === PASS){
-         setAccess(true);
-         navigate("/home");
-      }else{
-        alert("Incorrect password or user");
+   /*function login(userData) {
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/login';
+      axios(URL + `?email=${email}&password=${password}`)
+      .then(({ data }) => {
+         const { access } = data;
+         setAccess(access);
+         access && navigate('/home');
+      });
+   };*/
+
+   //login with async await
+   const login = async function(userData) {
+      try {
+         const { email, password } = userData;
+         const { data } = await axios(`${URL}?email=${email}&password=${password}`);
+         const { access } = data;
+
+         setAccess(access);
+         access && navigate("/home");
+
+      } catch (error){
+         console.log(error.message);
       }
-   };
+   }
 
    const logOut = () =>{
          setAccess(false);
@@ -65,7 +97,8 @@ function App() {
 
    return (
       <div className='App'>
-         {location.pathname !== "/" && <Nav logOut={logOut} onSearch={onSearch}/>}
+         {location.pathname === "/" || location.pathname.startsWith("/detail/") ? null : (
+         <Nav logOut={logOut} onSearch={onSearch}/>)}
          <Routes>
             <Route path="/" element={<Form login={login}/>}></Route>
             <Route path="/favorites" element={<Favorites />}></Route>

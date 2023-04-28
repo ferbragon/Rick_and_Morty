@@ -1,3 +1,33 @@
+.box-favorites {
+    font-family: Minecraft, sans-serif;
+}
+
+.box-favorites > select {
+    background-color: rgba(59, 59, 59, 0.55);
+    border-radius: 5px 5px 0 0;
+    height: 20px;
+    color: gold;
+    font-family: VCR OSD MONO, sans-serif;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 1s;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.box-favorites > select:hover {
+    background-color: rgba(124, 124, 124, 0.774);
+}
+
+.option {
+    background-color: rgba(124, 124, 124, .1);
+}
+
+h1 {
+    color: rgb(226, 18, 18);
+    margin-top: 20px;
+}
+
 .favorites {
     display: flex;
     align-items: center;
