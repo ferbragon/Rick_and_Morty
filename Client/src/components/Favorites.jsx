@@ -3,6 +3,7 @@ import Card from "./Card";
 import { filterCards, orderCards } from "../redux/actions";
 import { useState } from "react";
 import "../stylesheets/Favorites.css";
+import ScrollButton from './ScrollButton';
 
 export const Favorites = ({ myFavorites, allCharactersFav }) => {
     const dispatch = useDispatch();
@@ -34,7 +35,7 @@ export const Favorites = ({ myFavorites, allCharactersFav }) => {
         </select>
         <div className="favorites">
             {
-                myFavorites && myFavorites.map((character) => {
+                myFavorites && myFavorites.flat().map((character) => {
                     return(
                         <Card
                             key={character.id}//Reservado para React
@@ -51,6 +52,7 @@ export const Favorites = ({ myFavorites, allCharactersFav }) => {
                 })
             }
         </div>
+        <ScrollButton />
         </div>
     )
 };

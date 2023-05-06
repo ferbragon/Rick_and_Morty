@@ -1,4 +1,4 @@
-import { ADD_FAV, REMOVE_FAV, FILTER, ORDER } from "./types";
+import { ADD_FAV, REMOVE_FAV, FILTER, ORDER, ALL_FAVS, REMOVE_ALL_FAVS } from "./types";
 
 const initialState = {
     myFavorites: [],//Se pisan los resultados de filtrado para mostrar
@@ -10,14 +10,14 @@ const reducer = (state = initialState, { type, payload }) => {
         case ADD_FAV:
             return {
                 ...state,
-                myFavorites: [...state.myFavorites, payload],
-                allCharactersFav: [...state.allCharactersFav, payload]
+                myFavorites: [...payload],
+                allCharactersFav: [...payload]
               };
         case REMOVE_FAV:
             return {
                 ...state,
-                myFavorites: state.myFavorites.filter(fav => fav.id !== payload),
-                allCharactersFav: state.allCharactersFav.filter(fav => fav.id !== payload)
+                myFavorites: [...payload],
+                allCharactersFav: [...payload]
               };
         case FILTER:
             let charactersFilter = state.allCharactersFav.filter((character) => character.gender === payload);
@@ -37,6 +37,20 @@ const reducer = (state = initialState, { type, payload }) => {
                 ...state,
                 myFavorites: payload === "A" ? allCharactersFavCopy.sort(orderA) : allCharactersFavCopy.sort(orderD)
             }
+        case ALL_FAVS:
+            return {
+                ...state,
+                myFavorites: payload,
+                allCharactersFav: payload,
+            };
+        case REMOVE_ALL_FAVS:
+            return {
+                ...state,
+                myFavorites: [...payload],
+                allCharactersFav: [...payload]
+                };
+
+
         default:
             return { ...state }
     }

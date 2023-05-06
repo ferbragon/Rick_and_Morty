@@ -29,7 +29,7 @@ const Detail = () => {
           // Ocultar el componente Loading después de que se complete la carga de los datos
           setTimeout(() => {
             setLoading(false);
-          }, 1500);
+          }, 2200);
         });
     }, [id]);
 

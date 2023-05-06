@@ -1,0 +1,21 @@
+.scrollButton {
+   background-color: transparent;
+   position: fixed; 
+   width: 85px;
+   height: 90px;
+   right: 3%;
+   bottom: 40px;
+   font-size: 3rem;
+   z-index: 1;
+   cursor: pointer;
+   background-image: url("../assets/pickleRick.png");
+   background-size: 60%;
+   background-repeat: no-repeat;
+   border: none;
+   opacity: .6;
+   transition: opacity 1.5s;
+}
+
+.scrollButton:hover {
+   opacity: 1;
+}

@@ -50,10 +50,14 @@
     color: white
 }
 
+.allFavs {
+    width: 3%;
+}
+
 .searchbar {
     margin-top: -25px;
 }
 
 .rick-head {
-    width: 3%;
+    width: 100%;
 }

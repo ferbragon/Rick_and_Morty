@@ -15,10 +15,14 @@
     transition: filter 1s;
 }
 
-.animate {
-    animation-duration: 3s;
-    animation-name: slidein;
-}
+.card-enter {
+    opacity: 0;
+    transform: translateX(400%);
+    animation-name: card-enter-animation;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.3s;
+  }
 
 .card:hover {
     filter: saturate(180%);
@@ -142,11 +146,13 @@ h2 {
 
 /*Animation*/
 
-@keyframes slidein {
+@keyframes card-enter-animation {
     from {
-      bottom: -100px;
+      opacity: 0;
+      transform: translateX(400%);
     }
     to {
-      bottom: 0;
+      opacity: 1;
+      transform: translateX(0%);
     }
   }

@@ -43,7 +43,21 @@ server.use((req, res, next) => {
 
 //Se realiza módulo para testing
 const { server } = require("./app.js");
+const { conn } = require('./DB_connection');
 const PORT = 3001;
 
 
-server.listen(PORT, () => {console.log(`Server rised in port ${PORT}`)});
+// Conectar a la base de datos y sincronizar los modelos
+conn.sync({force: false})
+  .then(() => {
+    console.log('Conexión a la base de datos exitosa');
+  })
+  .then(() => {
+    // Iniciar el servidor una vez que la conexión y la sincronización estén completas
+    server.listen(PORT, () => {
+      console.log(`Server rised in port ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error('Error al conectar con la base de datos:', error);
+  });

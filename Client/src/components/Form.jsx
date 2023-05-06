@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { validation} from "./validation.js";
 import "../stylesheets/Form.css";
-import mainImage from "../assets/icegif-519.gif"
+import mainImage from "../assets/icegif-519.gif";
 
 const Form = ({ login }) => {
 
@@ -52,7 +52,7 @@ const Form = ({ login }) => {
             <label className="label-login" htmlFor="email">Email:</label>
             <input className="input-login" onChange={handleChange} value={userData.email} name="email" type="text" placeholder="Enter an email"/>
             <label className="label-login-password" htmlFor="password">Password:</label>
-            <input className="input-login" onChange={handleChange} value={userData.password} name="password" type="text" placeholder="Enter your password"/>
+            <input className="input-login password" onChange={handleChange} value={userData.password} name="password" type="password" placeholder="Enter your password"/>
             <button className="button-login" value="submit"><span>LOG IN</span></button>
             </div>
         </form>

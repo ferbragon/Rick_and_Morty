@@ -1,0 +1,33 @@
+.about{
+    font-family: VCR OSD MONO, sans-serif;
+    margin-bottom: 30px;
+}
+
+.about > h1 {
+    text-align: left;
+    margin-top: 4%;
+    margin-left: 15%;
+    font-size: 2.5rem;
+}
+
+.about > p {
+    text-align: justify;
+    margin: 40px auto;
+    padding: 0% 15%;
+    line-height: 120%;
+    text-indent: 40px;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.about > p > span {
+    color: gold;
+}
+
+.signature {
+    color: red;
+    text-align: end;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    display: block;
+}

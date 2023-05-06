@@ -17,6 +17,7 @@ html{
    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#222222",endColorstr="#000000",GradientType=1);
    cursor: url("./assets/r&mcursor.png"), auto;
    background-attachment:fixed;
+   overflow-x: hidden;
 }
 
 

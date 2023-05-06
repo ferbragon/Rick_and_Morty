@@ -43,6 +43,7 @@
     cursor: pointer;
     background-color: rgba(39, 37, 37, 0.836);
     transition: background-color 1s;
+    font-family: VCR OSD MONO;
 }
 
 .button-detail-close:hover {

@@ -8,7 +8,6 @@ import About from './components/About';
 import Detail from './components/Detail';
 import Form from "./components/Form";
 import Favorites from './components/Favorites';
-import Loading from './components/Loading';
 
 
 //const URL_BASE = "https://be-a-rym.up.railway.app/api/character";
@@ -24,7 +23,6 @@ function App() {
    //States
    const [characters, setCharacters] = useState([]);
    const [access, setAccess] = useState(false);
-   const [loading, setLoading] = useState(false);
 
    //Sets
 
@@ -98,7 +96,7 @@ function App() {
    return (
       <div className='App'>
          {location.pathname === "/" || location.pathname.startsWith("/detail/") ? null : (
-         <Nav logOut={logOut} onSearch={onSearch}/>)}
+         <Nav logOut={logOut} onSearch={onSearch} characters={characters} />)}
          <Routes>
             <Route path="/" element={<Form login={login}/>}></Route>
             <Route path="/favorites" element={<Favorites />}></Route>

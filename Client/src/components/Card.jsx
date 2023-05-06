@@ -8,11 +8,13 @@ import  favNo from "../assets/heartnon.png";
 import favYes from "../assets/heartyes.png";
 
 
-export function Card({ id, name, status, species, gender, origin, image, onClose, addFav, removeFav, myFavorites }) {
+export function Card({ id, name, status, species, gender, origin, image, onClose, addFav, removeFav, myFavorites, isAnimated }) {
 
    const location = useLocation();
 
    const [isFav, setIsFav] = useState(false);
+   
+   const [animationCompleted, setAnimationCompleted] = useState(false);
 
    const handleFavorite = () => {
       const characterProps = { id, name, status, species, gender, origin, image, onClose }; 
@@ -35,10 +37,31 @@ export function Card({ id, name, status, species, gender, origin, image, onClose
          });
       }
    }, [myFavorites, id]);
+
+   useEffect(() => {
+      const isCharacterFavorite = myFavorites.some(fav => fav.id === id);
+   
+      if (isCharacterFavorite) {
+         setIsFav(true);
+      } else {
+         setIsFav(false);
+      }
+   }, [myFavorites, id]);
+
+         
+   useEffect(() => {
+      if (!isAnimated && !animationCompleted) {
+         const timer = setTimeout(() => {
+         setAnimationCompleted(true);
+         }, 1500); // La duración de la animación en milisegundos
+ 
+     return () => clearTimeout(timer);
+      }
+   }, [isAnimated, animationCompleted]);
    
 
    return (
-      <div className="card">
+      <div className={`card ${!isAnimated && !animationCompleted ? 'card-enter' : ''}`}>
          <button id={id} onClick={location.pathname === "/home" ? () => onClose(id) : handleFavorite }>
             {location.pathname === "/home" ? <span>Delete Card</span> : <span>Discard favorite</span>}
          </button>

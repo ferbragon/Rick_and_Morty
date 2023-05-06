@@ -1,7 +1,12 @@
 import Card from './Card';
 import "../stylesheets/Cards.css";
+import { useState, useEffect } from 'react';
+import ScrollButton from './ScrollButton';
 
 export default function Cards({ characters, onClose }) {
+
+   //const [loaded, setLoaded] = useState(false);
+   const [animatedCards, setAnimatedCards] = useState([]);
 
    return (
    <div className='cards'>
@@ -18,9 +23,11 @@ export default function Cards({ characters, onClose }) {
             origin={origin.name}
             image={image}
             onClose={onClose}
+            isAnimated={animatedCards.includes(id)}
          />
          )
       })}
+      <ScrollButton />
    </div>
    )
 };
